@@ -60,8 +60,6 @@ def roll_dice():
     lbl_results.config(text=dice_total) 
     
     update_history()
-    
-    return dice_total, dice_list   
  
 def update_history():
     lbl_history.config(text="".join(map(str, history_list)))
