@@ -1,6 +1,8 @@
 import random
+import csv
 import tkinter as tk
 from tkinter import ttk
+
 
 # number_of_dice = 2
 # dice_size = 8
@@ -32,10 +34,10 @@ def number_dice_change(change):
         new_value = 1
     sv_dice_amount.set(new_value)  # Increment and update
     
-def roll_dice():
-    number_of_dice= sv_dice_amount.get()
-    dice_size = sv_dice_size.get()
-    modifier = sv_modifier.get()
+def roll_dice(number_of_dice,dice_size,modifier):
+    # number_of_dice = sv_dice_amount.get()
+    # dice_size = sv_dice_size.get()
+    # modifier = sv_modifier.get()
     
     if 'd' in dice_size:
         dice_size = dice_size[1:]
@@ -126,7 +128,7 @@ frm_roll_dice.grid_propagate(False)
 lbl_roll_dice = tk.Label(master=frm_roll_dice, text="roll dice", height=2)
 lbl_roll_dice.grid(row=1,column=0)
 
-btn_roll_dice = ttk.Button(frm_roll_dice, text="roll", command=lambda: roll_dice())
+btn_roll_dice = ttk.Button(frm_roll_dice, text="roll", command=lambda: roll_dice(sv_dice_amount.get(),sv_dice_size.get(),sv_modifier.get()))
 btn_roll_dice.grid(row=2,column=0)
 
 lbl_results = tk.Label(master=frm_roll_dice, text="", height=2)
@@ -140,5 +142,34 @@ frm_history.grid(row=1,column=0,columnspan=5,rowspan=4)
 
 lbl_history = tk.Label(master=frm_history, text="No history yet", height=len(history_list),width=50)
 lbl_history.grid(row=3,column=0)
+
+##### presets
+row_count = 2
+with open("presets.csv", "r") as file:
+    reader = csv.DictReader(file)
+    data = list(reader)
+
+frm_presets = tk.Frame(master=window,relief=tk.GROOVE,borderwidth=5,height=115,width=87)
+frm_presets.grid(row=0,column=5)
+
+lbl_presets = tk.Label(master=frm_presets, text="Presets", height=2)
+lbl_presets.grid(row=1,column=0)
+
+lst_preset_labels = []
+lst_preset_rolls = []
+
+for row in data:
+    print(row)
+    if int(row['Modifier']) < 0:
+        lst_preset_labels.append(tk.Label(master=frm_presets, text=f"{row['Number']}d{row['Size']}-{row['Modifier']}"))
+    else:
+        lst_preset_labels.append(tk.Label(master=frm_presets, text=f"{row['Number']}d{row['Size']}+{row['Modifier']}"))
+
+    lst_preset_rolls.append(ttk.Button(frm_presets, text="roll", command=lambda: roll_dice(row['Number'],row['Size'],row['Modifier'])))
+
+for label, roll in zip(lst_preset_labels,lst_preset_rolls):
+    label.grid(row=row_count,column=0)
+    roll.grid(row=row_count,column=1)
+    row_count += 1
 
 window.mainloop()
