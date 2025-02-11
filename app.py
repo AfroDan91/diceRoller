@@ -52,7 +52,7 @@ def roll_dice(number_of_dice,dice_size,modifier):
     
     print(f"You rolled {number_of_dice}d{dice_size}+{modifier}\n dice = {dice_list} = {dice_total - int(modifier)} + {modifier} \n total = {dice_total}")
     
-    formatted_result = f"{number_of_dice}d{dice_size}+{modifier}  = {dice_total}\nDice = {dice_list}\n"
+    formatted_result = f"{number_of_dice}d{dice_size}+{modifier}  = {dice_total}   |   Dice = {dice_list}\n"
     
     history_list.append(formatted_result)
     
@@ -228,8 +228,6 @@ sv_new_preset_name = tk.StringVar(value="Input Name")
 ent_new_preset_name = ttk.Entry(frm_presets, textvariable=sv_new_preset_name,width=15, justify="center")
 ent_new_preset_dice = ttk.Entry(frm_presets, textvariable=sv_new_preset_dice, width=10, justify="center")
 btn_new_preset_submit = ttk.Button(frm_presets, text="Submit", command=new_preset_submit)
-
-
 
 btn_new_preset = ttk.Button(frm_presets, text="New", command=new_preset_create)
 btn_new_preset.grid(row=row_count+1,column=0,columnspan=2)
