@@ -63,10 +63,19 @@ def roll_dice(number_of_dice,dice_size,modifier):
 def update_history():
     lbl_history.config(text="".join(map(str, history_list)))
 
+wrapper_frame = tk.Frame(window)
+wrapper_frame.pack()
+
+left_frame = tk.Frame(wrapper_frame)
+left_frame.grid(row=0, column=0,sticky="n")
+
+right_frame = tk.Frame(wrapper_frame)
+right_frame.grid(row=0, column=1,sticky="n")
+
 ##### number of dice
 sv_dice_amount = tk.StringVar(value="1")
 
-frm_dice_amount = tk.Frame(master=window,relief=tk.GROOVE,borderwidth=5)
+frm_dice_amount = tk.Frame(master=left_frame,relief=tk.GROOVE,borderwidth=5)
 frm_dice_amount.grid(row=0,column=1,sticky="n")
 
 lbl_dice_amount = tk.Label(master=frm_dice_amount, text="number of dice", height=2)
@@ -84,7 +93,7 @@ btn_dice_amount_minus_1.grid(row=4,column=0)
 ##### size of dice
 sv_dice_size = tk.StringVar(value="d2")
 
-frm_dice_size = tk.Frame(master=window,relief=tk.GROOVE,borderwidth=5)
+frm_dice_size = tk.Frame(master=left_frame,relief=tk.GROOVE,borderwidth=5)
 frm_dice_size.grid(row=0,column=2,sticky="n")
 
 lbl_dice_amount = tk.Label(master=frm_dice_size, text="size of dice", height=2)
@@ -102,7 +111,7 @@ btn_dice_size_minus_1.grid(row=4,column=0)
 ##### modifier box 
 sv_modifier = tk.StringVar(value="0")
 
-frm_modifier = tk.Frame(master=window,relief=tk.GROOVE,borderwidth=5)
+frm_modifier = tk.Frame(master=left_frame,relief=tk.GROOVE,borderwidth=5)
 frm_modifier.grid(row=0,column=3,sticky="n")
 
 lbl_dice_amount = tk.Label(master=frm_modifier, text="modifier", height=2)
@@ -118,7 +127,7 @@ btn_modifier_minus_1 = ttk.Button(frm_modifier, text="-1", command=lambda: modif
 btn_modifier_minus_1.grid(row=4,column=0)
 
 ##### roll dice
-frm_roll_dice = tk.Frame(master=window,relief=tk.GROOVE,borderwidth=5,height=115,width=87)
+frm_roll_dice = tk.Frame(master=left_frame,relief=tk.GROOVE,borderwidth=5,height=115,width=87)
 frm_roll_dice.grid(row=0,column=4,sticky="n")
 frm_roll_dice.grid_propagate(False)
 
@@ -134,8 +143,8 @@ lbl_results.grid(row=3,column=0)
 ##### history
 history_list = []
 
-frm_history = tk.Frame(master=window,relief=tk.GROOVE,borderwidth=5)
-frm_history.grid(row=1,column=0,columnspan=5,rowspan=2,sticky="ns")
+frm_history = tk.Frame(master=left_frame,relief=tk.GROOVE,borderwidth=5)
+frm_history.grid(row=1,column=0,columnspan=5,sticky="n")
 
 lbl_history = tk.Label(master=frm_history, text="No history yet", height=len(history_list),width=50)
 lbl_history.grid(row=3,column=0)
@@ -170,8 +179,8 @@ def generate_presets():
         roll.grid(row=row_count,column=1)
         row_count += 1
 
-frm_presets = tk.Frame(master=window,relief=tk.GROOVE,borderwidth=5,height=115,width=87)
-frm_presets.grid(row=0,column=5,sticky="n")
+frm_presets = tk.Frame(master=right_frame,relief=tk.GROOVE,borderwidth=5,height=115,width=87)
+frm_presets.grid(row=0,column=5,rowspan=999, sticky="ns")
 
 lbl_presets = tk.Label(master=frm_presets, text="Presets", height=2)
 lbl_presets.grid(row=1,column=0,columnspan=2)
@@ -227,6 +236,10 @@ btn_new_preset.grid(row=row_count+1,column=0,columnspan=2)
 
 
 
+window.grid_rowconfigure(0, weight=1)  # Allow row 0 to expand
 
+window.grid_columnconfigure(5, weight=1)  # Allow column 5 to expand
+window.grid_rowconfigure(1, weight=0)  # Keep row 1 fixed
+window.grid_columnconfigure(0, weight=0)  # Keep column 0 fixed
 
 window.mainloop()
