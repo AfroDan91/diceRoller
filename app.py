@@ -52,7 +52,7 @@ def roll_dice(number_of_dice,dice_size,modifier):
     
     print(f"You rolled {number_of_dice}d{dice_size}+{modifier}\n dice = {dice_list} = {dice_total - int(modifier)} + {modifier} \n total = {dice_total}")
     
-    formatted_result = f"{number_of_dice}d{dice_size}+{modifier} | {dice_list} + {modifier} = {dice_total}\n"
+    formatted_result = f"{number_of_dice}d{dice_size}+{modifier}  = {dice_total}\nDice = {dice_list}\n"
     
     history_list.append(formatted_result)
     
@@ -146,7 +146,7 @@ history_list = []
 frm_history = tk.Frame(master=left_frame,relief=tk.GROOVE,borderwidth=5)
 frm_history.grid(row=1,column=0,columnspan=5,sticky="n")
 
-lbl_history = tk.Label(master=frm_history, text="No history yet", height=len(history_list),width=50)
+lbl_history = tk.Label(master=frm_history, text="No history yet", height=len(history_list),width=50,wraplength=350, justify="left")
 lbl_history.grid(row=3,column=0)
 
 ##### presets
@@ -204,7 +204,7 @@ def new_preset_submit():
     
     if validate_inputs_new_preset(sv_new_preset_dice.get()):
         new_row.append(sv_new_preset_name.get())
-        new_dice = re.split(r"[d\+\-]", sv_new_preset_dice.get())
+        new_dice = re.split(r"[d|+\-]", sv_new_preset_dice.get())
         print(new_dice)
         new_row.extend(new_dice)
         print(new_row)
