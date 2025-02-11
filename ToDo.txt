@@ -1,0 +1,4 @@
+001 - fix preset duplication issue
+002 - format history better to allow for large numbers of dice
+003 - make preset scrollable
+004 - make history scrollable

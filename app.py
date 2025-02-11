@@ -128,7 +128,7 @@ btn_modifier_minus_1.grid(row=4,column=0)
 
 ##### roll dice
 frm_roll_dice = tk.Frame(master=left_frame,relief=tk.GROOVE,borderwidth=5,height=115,width=87)
-frm_roll_dice.grid(row=0,column=4,sticky="n")
+frm_roll_dice.grid(row=0,column=4,sticky="ns")
 frm_roll_dice.grid_propagate(False)
 
 lbl_roll_dice = tk.Label(master=frm_roll_dice, text="roll dice", height=2)
@@ -172,7 +172,7 @@ def generate_presets():
         else:
             lst_preset_labels.append(tk.Label(master=frm_presets, text=f"{row['Name']} {row['Number']}d{row['Size']}+{row['Modifier']}"))
 
-        lst_preset_roll_btn.append(ttk.Button(frm_presets, text="roll", command=lambda: roll_dice(row['Number'],row['Size'],row['Modifier'])))
+        lst_preset_roll_btn.append(ttk.Button(frm_presets, text="roll", command=lambda n=row['Number'], s=row['Size'], m=row['Modifier']: roll_dice(n, s, m)))
 
     for label, roll in zip(lst_preset_labels,lst_preset_roll_btn):
         label.grid(row=row_count,column=0)
@@ -233,13 +233,5 @@ btn_new_preset_submit = ttk.Button(frm_presets, text="Submit", command=new_prese
 
 btn_new_preset = ttk.Button(frm_presets, text="New", command=new_preset_create)
 btn_new_preset.grid(row=row_count+1,column=0,columnspan=2)
-
-
-
-window.grid_rowconfigure(0, weight=1)  # Allow row 0 to expand
-
-window.grid_columnconfigure(5, weight=1)  # Allow column 5 to expand
-window.grid_rowconfigure(1, weight=0)  # Keep row 1 fixed
-window.grid_columnconfigure(0, weight=0)  # Keep column 0 fixed
 
 window.mainloop()
