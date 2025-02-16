@@ -4,14 +4,6 @@ import re
 import tkinter as tk
 from tkinter import ttk
 
-
-# number_of_dice = 2
-# dice_size = 8
-# modifier = -1
-# rolled_dice = []
-
-
-
 window = tk.Tk()
 window.title("Dice Roller")
 
@@ -35,7 +27,7 @@ def number_dice_change(change):
         new_value = 1
     sv_dice_amount.set(new_value)  # Increment and update
     
-def roll_dice(number_of_dice,dice_size,modifier):
+def roll_dice(number_of_dice, dice_size, modifier):
     if 'd' in dice_size:
         dice_size = dice_size[1:]
     
@@ -185,8 +177,7 @@ frm_presets.grid(row=0,column=5,rowspan=999, sticky="ns")
 lbl_presets = tk.Label(master=frm_presets, text="Presets", height=2)
 lbl_presets.grid(row=1,column=0,columnspan=2)
 
-generate_presets()
-generate_presets()
+
 # new preset
 def validate_inputs_new_preset(input):
     if "d" in input: 
@@ -213,8 +204,8 @@ def new_preset_submit():
             writer = csv.writer(file)
             writer.writerow(new_row) 
     
-    generate_presets()
-        
+
+
     
 def new_preset_create():
     btn_new_preset.grid_forget()
@@ -231,5 +222,10 @@ btn_new_preset_submit = ttk.Button(frm_presets, text="Submit", command=new_prese
 
 btn_new_preset = ttk.Button(frm_presets, text="New", command=new_preset_create)
 btn_new_preset.grid(row=row_count+1,column=0,columnspan=2)
+
+if __name__ == "__main__":  
+    generate_presets()  # Runs only if executed directly
+    
+generate_presets()
 
 window.mainloop()

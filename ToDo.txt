@@ -2,3 +2,5 @@
 [X]002 - format history better to allow for large numbers of dice
 []003 - make preset scrollable
 []004 - make history scrollable
+[]005 - make unit tests
+[]006 - put box around results
