@@ -204,7 +204,10 @@ def new_preset_submit():
             writer = csv.writer(file)
             writer.writerow(new_row) 
     
-
+if __name__ == "__main__":  
+    generate_presets()  # Runs only if executed directly
+    
+generate_presets()
 
     
 def new_preset_create():
@@ -223,9 +226,6 @@ btn_new_preset_submit = ttk.Button(frm_presets, text="Submit", command=new_prese
 btn_new_preset = ttk.Button(frm_presets, text="New", command=new_preset_create)
 btn_new_preset.grid(row=row_count+1,column=0,columnspan=2)
 
-if __name__ == "__main__":  
-    generate_presets()  # Runs only if executed directly
-    
-generate_presets()
+
 
 window.mainloop()
